@@ -5,13 +5,10 @@
 import {
 
     db,
-    auth,
 
     doc,
     getDoc,
-    updateDoc,
-
-    onAuthStateChanged
+    updateDoc
 
 } from "./firebase.js";
 
@@ -48,22 +45,12 @@ if(!childUid){
 }
 
 // -------------------------------------
-// Wachten op Google Login
+// Bevestigen
 // -------------------------------------
 
-onAuthStateChanged(auth, async parent => {
+confirmParent();
 
-    if(!parent){
-
-        title.textContent =
-            "Niet ingelogd";
-
-        message.textContent =
-            "Log eerst in met hetzelfde Google-account waarmee je de aanvraag hebt gedaan.";
-
-        return;
-
-    }
+async function confirmParent(){
 
     try{
 
@@ -88,31 +75,47 @@ onAuthStateChanged(auth, async parent => {
         const data =
             snapshot.data();
 
-        // -----------------------------
-        // Heeft al een andere ouder?
-        // -----------------------------
+        // ---------------------------------
+        // Is er een openstaande aanvraag?
+        // ---------------------------------
 
         if(
 
-            data.parentUid &&
+            !data.pendingParentUid ||
 
-            data.parentUid !== parent.uid
+            !data.pendingParentEmail
 
         ){
 
             title.textContent =
-                "Al gekoppeld";
+                "Geen openstaande aanvraag";
 
             message.textContent =
-                "Dit kind is al gekoppeld aan een andere ouder.";
+                "Deze bevestigingslink is niet meer geldig.";
 
             return;
 
         }
 
-        // -----------------------------
-        // Opslaan
-        // -----------------------------
+        // ---------------------------------
+        // Al gekoppeld?
+        // ---------------------------------
+
+        if(data.parentUid){
+
+            title.textContent =
+                "Al gekoppeld";
+
+            message.textContent =
+                "Dit kind is al gekoppeld aan een ouder.";
+
+            return;
+
+        }
+
+        // ---------------------------------
+        // Ouder koppelen
+        // ---------------------------------
 
         await updateDoc(
 
@@ -122,9 +125,15 @@ onAuthStateChanged(auth, async parent => {
 
                 parentVerified: true,
 
-                parentUid: parent.uid,
+                parentUid:
+                    data.pendingParentUid,
 
-                emailParent: parent.email
+                emailParent:
+                    data.pendingParentEmail,
+
+                pendingParentUid: null,
+
+                pendingParentEmail: null
 
             }
 
@@ -134,7 +143,7 @@ onAuthStateChanged(auth, async parent => {
             "Gelukt!";
 
         message.textContent =
-            "Je hebt dit kind succesvol gekoppeld aan je ouderaccount.";
+            "De ouderaccount is succesvol gekoppeld. Je mag dit venster sluiten.";
 
     }
 
@@ -150,4 +159,4 @@ onAuthStateChanged(auth, async parent => {
 
     }
 
-});
+}
