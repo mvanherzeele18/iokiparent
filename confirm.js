@@ -1,17 +1,23 @@
 // =====================================
-// Ioki Parent
-// Confirm
+// Ioki Parent - Confirm
 // =====================================
 
 import {
 
     db,
+    auth,
 
     doc,
     getDoc,
-    updateDoc
+    updateDoc,
+
+    onAuthStateChanged
 
 } from "./firebase.js";
+
+// -------------------------------------
+// Elementen
+// -------------------------------------
 
 const title =
     document.getElementById("title");
@@ -20,32 +26,21 @@ const message =
     document.getElementById("message");
 
 // -------------------------------------
-// UID uit URL halen
+// UID uit URL
 // -------------------------------------
 
 const params =
+    new URLSearchParams(window.location.search);
 
-    new URLSearchParams(
-
-        window.location.search
-
-    );
-
-const uid =
+const childUid =
     params.get("uid");
 
-// -------------------------------------
-// Geen UID
-// -------------------------------------
-
-if(!uid){
+if(!childUid){
 
     title.textContent =
-
         "Ongeldige link";
 
     message.textContent =
-
         "Deze bevestigingslink is ongeldig.";
 
     throw new Error("Geen uid.");
@@ -53,70 +48,93 @@ if(!uid){
 }
 
 // -------------------------------------
-// Bevestigen
+// Wachten op Google Login
 // -------------------------------------
 
-confirmParent();
+onAuthStateChanged(auth, async parent => {
 
-async function confirmParent(){
+    if(!parent){
+
+        title.textContent =
+            "Niet ingelogd";
+
+        message.textContent =
+            "Log eerst in met hetzelfde Google-account waarmee je de aanvraag hebt gedaan.";
+
+        return;
+
+    }
 
     try{
 
-        const userRef =
-
-            doc(
-
-                db,
-
-                "users",
-
-                uid
-
-            );
+        const childRef =
+            doc(db,"users",childUid);
 
         const snapshot =
-
-            await getDoc(
-
-                userRef
-
-            );
+            await getDoc(childRef);
 
         if(!snapshot.exists()){
 
             title.textContent =
-
                 "Profiel niet gevonden";
 
             message.textContent =
-
                 "Dit profiel bestaat niet.";
 
             return;
 
         }
 
+        const data =
+            snapshot.data();
+
+        // -----------------------------
+        // Heeft al een andere ouder?
+        // -----------------------------
+
+        if(
+
+            data.parentUid &&
+
+            data.parentUid !== parent.uid
+
+        ){
+
+            title.textContent =
+                "Al gekoppeld";
+
+            message.textContent =
+                "Dit kind is al gekoppeld aan een andere ouder.";
+
+            return;
+
+        }
+
+        // -----------------------------
+        // Opslaan
+        // -----------------------------
+
         await updateDoc(
 
-            userRef,
+            childRef,
 
             {
 
-                parentUid = auth.currentUser.uid,
-                emailParent = auth.currentUser.email,
-                parentVerified = true
+                parentVerified: true,
+
+                parentUid: parent.uid,
+
+                emailParent: parent.email
 
             }
 
         );
 
         title.textContent =
-
             "Gelukt!";
 
         message.textContent =
-
-            "De ouderaccount is succesvol gekoppeld. Je mag dit venster sluiten.";
+            "Je hebt dit kind succesvol gekoppeld aan je ouderaccount.";
 
     }
 
@@ -125,13 +143,11 @@ async function confirmParent(){
         console.error(error);
 
         title.textContent =
-
             "Er ging iets mis";
 
         message.textContent =
-
             "Probeer het later opnieuw.";
 
     }
 
-}
+});
