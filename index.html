@@ -49,10 +49,11 @@
             </p>
 
             <input
-                type="text"
                 id="profile-id"
-                placeholder="Bijvoorbeeld: A7K9-X4M2"
+                type="text"
                 maxlength="9"
+                placeholder="VOORBEELD: A7K9-X4M2"
+                autocomplete="off"
             >
 
             <button id="continue-button">
@@ -65,15 +66,17 @@
 
         <div class="info">
 
-            <h3>Wat gebeurt er hierna?</h3>
+            <h3>Hoe werkt het?</h3>
 
             <ul>
 
-                <li>✔ We zoeken het profiel van je kind.</li>
+                <li>Voer het Profile-ID van je kind in.</li>
 
-                <li>✔ Er wordt een bevestigingsmail gestuurd.</li>
+                <li>Wij zoeken het profiel op.</li>
 
-                <li>✔ Na bevestiging kun je instellingen aanpassen.</li>
+                <li>Er wordt een bevestigingsmail verstuurd.</li>
+
+                <li>Na bevestiging kun je alle instellingen beheren.</li>
 
             </ul>
 
@@ -81,7 +84,10 @@
 
     </div>
 
-    <script src="script.js"></script>
+    <script
+        type="module"
+        src="script.js"
+    ></script>
 
 </body>
 
