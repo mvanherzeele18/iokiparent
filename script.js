@@ -1,194 +1,73 @@
 // =====================================
 // Ioki Parent
-// Index
+// Home
 // =====================================
 
 import {
 
     db,
 
+    auth,
+
     collection,
     query,
     where,
-    getDocs
+    getDocs,
+
+    signInWithPopup,
+    GoogleAuthProvider,
+    signOut,
+    onAuthStateChanged
 
 } from "./firebase.js";
 
-const profileInput =
-    document.getElementById("profile-id");
-
-const continueButton =
-    document.getElementById("continue-button");
-
 // -------------------------------------
-// EmailJS starten
+// Elementen
 // -------------------------------------
 
-emailjs.init("ShVsN09_8RGYLnUg2");
+const loginCard =
+    document.getElementById("login-card");
+
+const parentCard =
+    document.getElementById("parent-card");
+
+const loginButton =
+    document.getElementById("google-login");
+
+const logoutButton =
+    document.getElementById("logout");
+
+const addChildButton =
+    document.getElementById("add-child");
+
+const parentEmail =
+    document.getElementById("parent-email");
+
+const childrenList =
+    document.getElementById("children-list");
 
 // -------------------------------------
-// Profile-ID opmaken
+// Google Provider
 // -------------------------------------
 
-profileInput.addEventListener("input", () => {
-
-    let value = profileInput.value
-        .toUpperCase()
-        .replace(/[^A-Z0-9]/g, "");
-
-    if (value.length > 4) {
-
-        value =
-            value.substring(0, 4) +
-            "-" +
-            value.substring(4, 8);
-
-    }
-
-    profileInput.value = value;
-
-});
+const provider =
+    new GoogleAuthProvider();
 
 // -------------------------------------
-// Enter
+// Login
 // -------------------------------------
 
-profileInput.addEventListener("keydown", e => {
+loginButton.addEventListener("click", async () => {
 
-    if (e.key === "Enter") {
+    try{
 
-        searchProfile();
+        await signInWithPopup(
 
-    }
+            auth,
 
-});
-
-// -------------------------------------
-// Knop
-// -------------------------------------
-
-continueButton.addEventListener("click", () => {
-
-    searchProfile();
-
-});
-
-// -------------------------------------
-// Profiel zoeken
-// -------------------------------------
-
-async function searchProfile() {
-
-    const profileId =
-        profileInput.value.trim();
-
-    if (profileId === "") {
-
-        alert("Vul een Profile-ID in.");
-
-        profileInput.focus();
-
-        return;
-
-    }
-
-    continueButton.disabled = true;
-
-    continueButton.textContent =
-        "Zoeken...";
-
-    try {
-
-        const q = query(
-
-            collection(db, "users"),
-
-            where("profileId", "==", profileId)
+            provider
 
         );
-
-        const result =
-            await getDocs(q);
-
-        if (result.empty) {
-
-            alert("Profiel niet gevonden.");
-
-            continueButton.disabled = false;
-
-            continueButton.textContent =
-                "Profiel koppelen";
-
-            return;
-
-        }
-
-        const user =
-            result.docs[0];
-
-        const data =
-            user.data();
-
-        // ---------------------------------
-        // Gegevens bewaren
-        // ---------------------------------
-
-        sessionStorage.setItem(
-            "userId",
-            user.id
-        );
-
-        sessionStorage.setItem(
-            "profileId",
-            profileId
-        );
-
-        sessionStorage.setItem(
-            "email",
-            data.email
-        );
-
-        // ---------------------------------
-        // Bevestigingslink
-        // ---------------------------------
-
-        const verificationLink =
-
-            "https://mvanherzeele18.github.io/iokiparent/confirm.html?uid="
-
-            +
-
-            user.id;
-
-        // ---------------------------------
-        // E-mail versturen
-        // ---------------------------------
-
-        await emailjs.send(
-
-            "service_3f06gei",
-
-            "template_j6jvfke",
-
-            {
-
-                to_email: data.email,
-
-                verification_link: verificationLink,
-
-                profile_id: profileId
-
-            }
-
-        );
-
-        // ---------------------------------
-        // Naar verify
-        // ---------------------------------
-
-        window.location.href =
-
-            "verify.html";
 
     }
 
@@ -198,20 +77,281 @@ async function searchProfile() {
 
         alert(
 
-            "Er is iets misgelopen.\n\n"
-
-            +
-
-            error.message
+            "Inloggen mislukt."
 
         );
 
-        continueButton.disabled = false;
+    }
 
-        continueButton.textContent =
+});
 
-            "Profiel koppelen";
+// -------------------------------------
+// Logout
+// -------------------------------------
+
+logoutButton.addEventListener("click", async()=>{
+
+    await signOut(auth);
+
+});
+
+// -------------------------------------
+// Auth Listener
+// -------------------------------------
+
+onAuthStateChanged(
+
+    auth,
+
+    async(user)=>{
+
+        if(!user){
+
+            loginCard.classList.remove("hidden");
+
+            parentCard.classList.add("hidden");
+
+            return;
+
+        }
+
+        loginCard.classList.add("hidden");
+
+        parentCard.classList.remove("hidden");
+
+        parentEmail.textContent =
+            user.email;
+
+        loadChildren(user);
 
     }
+
+);
+
+// -------------------------------------
+// Kinderen laden
+// -------------------------------------
+
+async function loadChildren(user){
+
+    childrenList.innerHTML = "";
+
+    const q = query(
+
+        collection(db,"users"),
+
+        where(
+
+            "parentUid",
+
+            "==",
+
+            user.uid
+
+        )
+
+    );
+
+    const snapshot =
+        await getDocs(q);
+
+    if(snapshot.empty){
+
+        childrenList.innerHTML =
+
+        `
+        <p>
+
+            Nog geen gekoppelde kinderen.
+
+        </p>
+        `;
+
+        return;
+
+    }
+
+    // -------------------------------------
+    // Kinderen tonen
+    // -------------------------------------
+
+    snapshot.forEach(docSnap => {
+
+        const data =
+            docSnap.data();
+
+        const child =
+            document.createElement("div");
+
+        child.className =
+            "child";
+
+        child.innerHTML =
+
+        `
+            <div class="child-name">
+
+                ${data.name || data.profileId}
+
+            </div>
+
+            <button>
+
+                Dashboard
+
+            </button>
+
+        `;
+
+        child.querySelector("button")
+
+            .addEventListener("click",()=>{
+
+                sessionStorage.setItem(
+
+                    "userId",
+
+                    docSnap.id
+
+                );
+
+                window.location.href =
+
+                    "dashboard.html";
+
+            });
+
+        childrenList.appendChild(child);
+
+    });
+
+}
+
+// -------------------------------------
+// Kind koppelen
+// -------------------------------------
+
+addChildButton.addEventListener("click",()=>{
+
+    const profileId = prompt(
+
+        "Voer het Profile-ID van je kind in."
+
+    );
+
+    if(!profileId) return;
+
+    connectChild(
+
+        profileId
+            .trim()
+            .toUpperCase()
+
+    );
+
+});
+
+// -------------------------------------
+// Profiel zoeken
+// -------------------------------------
+
+async function connectChild(profileId){
+
+    const q = query(
+
+        collection(db,"users"),
+
+        where(
+
+            "profileId",
+
+            "==",
+
+            profileId
+
+        )
+
+    );
+
+    const snapshot =
+        await getDocs(q);
+
+    if(snapshot.empty){
+
+        alert(
+
+            "Profile-ID niet gevonden."
+
+        );
+
+        return;
+
+    }
+
+    const userDoc =
+        snapshot.docs[0];
+
+    const data =
+        userDoc.data();
+
+    // ---------------------------------
+    // Heeft al een ouder?
+    // ---------------------------------
+
+    if(
+
+        data.parentUid
+
+        &&
+
+        data.parentUid !== auth.currentUser.uid
+
+    ){
+
+        alert(
+
+            "Dit account heeft al een ouder."
+
+        );
+
+        return;
+
+    }
+
+    // ---------------------------------
+    // Tijdelijk bewaren
+    // ---------------------------------
+
+    sessionStorage.setItem(
+
+        "userId",
+
+        userDoc.id
+
+    );
+
+    sessionStorage.setItem(
+
+        "profileId",
+
+        profileId
+
+    );
+
+    sessionStorage.setItem(
+
+        "email",
+
+        data.email
+
+    );
+
+    // ---------------------------------
+    // Naar verificatie
+    // ---------------------------------
+
+    window.location.href =
+
+        "verify.html";
 
 }
