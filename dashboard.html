@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="nl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Ioki Parent - Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <img
+            src="assets/images/logo.png"
+            class="logo"
+            alt="Ioki Parent"
+        >
+
+        <h1>Dashboard</h1>
+
+        <p class="subtitle">
+
+            Beheer de instellingen van je kind.
+
+        </p>
+
+        <!-- Profiel -->
+
+        <div class="card">
+
+            <h2 id="child-name">
+
+                Kind laden...
+
+            </h2>
+
+            <p>
+
+                <strong>Profile-ID:</strong>
+
+                <span id="profile-id">
+
+                    -
+
+                </span>
+
+            </p>
+
+        </div>
+
+        <!-- Speeltijd -->
+
+        <div class="card">
+
+            <h3>
+
+                ⏰ Speeltijd
+
+            </h3>
+
+            <p>
+
+                Dagelijkse speeltijd:
+
+                <strong id="daily-limit">
+
+                    60 minuten
+
+                </strong>
+
+            </p>
+
+            <button id="time-button">
+
+                Speeltijd wijzigen
+
+            </button>
+
+        </div>
+
+        <!-- Games -->
+
+        <div class="card">
+
+            <h3>
+
+                🎮 Games
+
+            </h3>
+
+            <p>
+
+                Kies welke spellen beschikbaar zijn.
+
+            </p>
+
+            <button id="games-button">
+
+                Games beheren
+
+            </button>
+
+        </div>
+
+        <!-- Info -->
+
+        <div class="card">
+
+            <h3>
+
+                📖 Speluitleg
+
+            </h3>
+
+            <p>
+
+                Bekijk hoe elk spel werkt.
+
+            </p>
+
+            <button id="info-button">
+
+                Naar uitleg
+
+            </button>
+
+        </div>
+
+        <!-- Contact -->
+
+        <div class="card">
+
+            <h3>
+
+                ❓ Vraag stellen
+
+            </h3>
+
+            <p>
+
+                Heb je een vraag? Stel ze via het contactformulier.
+
+            </p>
+
+            <button id="contact-button">
+
+                Google Form openen
+
+            </button>
+
+        </div>
+
+        <!-- Terug -->
+
+        <button
+
+            id="back-button"
+
+            class="secondary"
+
+        >
+
+            ← Terug naar overzicht
+
+        </button>
+
+    </div>
+
+    <script
+        type="module"
+        src="dashboard.js"
+    ></script>
+
+</body>
+
+</html>
