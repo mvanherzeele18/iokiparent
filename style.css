@@ -246,6 +246,52 @@ button:active{
 }
 
 /* ===========================
+   Verify
+=========================== */
+
+.mail-icon{
+
+    font-size:5rem;
+
+    margin-bottom:20px;
+
+}
+
+.spinner{
+
+    width:60px;
+
+    height:60px;
+
+    margin:30px auto 0;
+
+    border:6px solid #d9ecff;
+
+    border-top:6px solid #4BA3FF;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+/* ===========================
    Mobiel
 =========================== */
 
