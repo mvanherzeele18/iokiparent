@@ -6,7 +6,10 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Ioki Parent</title>
 
@@ -18,70 +21,95 @@
 
     <div class="container">
 
-        <div class="logo">
-
-            <img src="assets/images/logo.png" alt="Ioki Parent">
-
-        </div>
+        <img
+            src="assets/images/logo.png"
+            class="logo"
+        >
 
         <h1>Ioki Parent</h1>
 
         <p class="subtitle">
 
-            Beheer eenvoudig de instellingen van je kind.
+            Beheer de instellingen van je kinderen.
 
         </p>
 
-        <div class="card">
+        <!-- Niet ingelogd -->
 
-            <h2>Profiel koppelen</h2>
+        <div
+            id="login-card"
+            class="card"
+        >
+
+            <h2>
+
+                Inloggen
+
+            </h2>
 
             <p>
 
-                Vul hieronder het Profile-ID van je kind in.
+                Log in met je Google-account om verder te gaan.
 
             </p>
 
-            <input
-                id="profile-id"
-                type="text"
-                maxlength="9"
-                placeholder="VOORBEELD: A7K9-X4M2"
-                autocomplete="off"
-            >
+            <button id="google-login">
 
-            <button id="continue-button">
-
-                Profiel koppelen
+                Inloggen met Google
 
             </button>
 
         </div>
 
-        <div class="info">
+        <!-- Ingelogd -->
 
-            <h3>Hoe werkt het?</h3>
+        <div
+            id="parent-card"
+            class="card hidden"
+        >
 
-            <ul>
+            <h2>
 
-                <li>Voer het Profile-ID van je kind in.</li>
+                Welkom
 
-                <li>Wij zoeken het profiel op.</li>
+            </h2>
 
-                <li>Er wordt een bevestigingsmail verstuurd.</li>
+            <p id="parent-email"></p>
 
-                <li>Na bevestiging kun je alle instellingen beheren.</li>
+            <h3>
 
-            </ul>
+                Jouw kinderen
+
+            </h3>
+
+            <div id="children-list">
+
+            </div>
+
+            <button id="add-child">
+
+                + Kind koppelen
+
+            </button>
+
+            <button
+                id="logout"
+                class="secondary"
+            >
+
+                Uitloggen
+
+            </button>
 
         </div>
 
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="module" src="script.js"></script>
+    <script
+        type="module"
+        src="script.js"
+    ></script>
 
 </body>
 
 </html>
-
