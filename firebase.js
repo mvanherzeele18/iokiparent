@@ -2,7 +2,11 @@
 // Ioki Parent - Firebase
 // =====================================
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import {
+
+    initializeApp
+
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
 import {
 
@@ -18,6 +22,16 @@ import {
     updateDoc
 
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+import {
+
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+    onAuthStateChanged
+
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
 // -------------------------------------
 // Firebase Config
@@ -45,9 +59,14 @@ const firebaseConfig = {
 // Firebase starten
 // -------------------------------------
 
-const app = initializeApp(firebaseConfig);
+const app =
+    initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+const db =
+    getFirestore(app);
+
+const auth =
+    getAuth(app);
 
 // -------------------------------------
 // Exporteren
@@ -56,6 +75,7 @@ const db = getFirestore(app);
 export {
 
     db,
+    auth,
 
     collection,
     query,
@@ -64,6 +84,11 @@ export {
 
     doc,
     getDoc,
-    updateDoc
+    updateDoc,
+
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+    onAuthStateChanged
 
 };
