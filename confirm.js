@@ -102,7 +102,9 @@ async function confirmParent(){
 
             {
 
-                parentVerified:true
+                parentUid = auth.currentUser.uid,
+                emailParent = auth.currentUser.email,
+                parentVerified = true
 
             }
 
