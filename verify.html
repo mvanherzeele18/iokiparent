@@ -34,7 +34,7 @@
 
         <p class="subtitle">
 
-            We hebben een bevestigingsmail gestuurd naar het e-mailadres van het kind.
+            Er is een bevestiging nodig voordat je de instellingen kunt beheren.
 
         </p>
 
@@ -46,42 +46,24 @@
 
             </div>
 
-            <h2>Bijna klaar!</h2>
+            <h2>Wachten op bevestiging...</h2>
 
-            <p>
+            <p id="status">
 
-                Open de mailbox van het kind en klik op de bevestigingslink.
-                Zodra de koppeling is goedgekeurd kun je de instellingen beheren.
+                We controleren automatisch of de koppeling is goedgekeurd.
 
             </p>
 
-            <button id="check-button">
-
-                Ik heb bevestigd
-
-            </button>
-
-        </div>
-
-        <div class="info">
-
-            <h3>Geen e-mail ontvangen?</h3>
-
-            <ul>
-
-                <li>Controleer de map Spam.</li>
-
-                <li>Wacht een paar minuten.</li>
-
-                <li>Controleer of het Profile-ID juist is.</li>
-
-            </ul>
+            <div class="spinner"></div>
 
         </div>
 
     </div>
 
-    <script src="verify.js"></script>
+    <script
+        type="module"
+        src="verify.js"
+    ></script>
 
 </body>
 
