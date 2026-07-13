@@ -154,7 +154,7 @@ async function searchProfile() {
 
         const verificationLink =
 
-            "https://mvanherzeele18.github.io/iokigames/confirm.html?uid="
+            "https://mvanherzeele18.github.io/iokiparent/confirm.html?uid="
 
             +
 
