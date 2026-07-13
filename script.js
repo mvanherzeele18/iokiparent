@@ -1,6 +1,18 @@
 // =====================================
 // Ioki Parent
+// Index
 // =====================================
+
+import {
+
+    db,
+
+    collection,
+    query,
+    where,
+    getDocs
+
+} from "./firebase.js";
 
 const profileInput =
     document.getElementById("profile-id");
@@ -8,18 +20,53 @@ const profileInput =
 const continueButton =
     document.getElementById("continue-button");
 
-// ---------------------------
-// Verder
-// ---------------------------
+// -------------------------------------
+// Profile-ID opmaken
+// -------------------------------------
 
-continueButton.addEventListener("click",()=>{
+profileInput.addEventListener("input",()=>{
+
+    let value = profileInput.value
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g,"");
+
+    if(value.length > 4){
+
+        value =
+            value.substring(0,4) +
+            "-" +
+            value.substring(4,8);
+
+    }
+
+    profileInput.value = value;
+
+});
+
+// -------------------------------------
+// Profiel koppelen
+// -------------------------------------
+
+continueButton.addEventListener("click",searchProfile);
+
+profileInput.addEventListener("keydown",e=>{
+
+    if(e.key==="Enter"){
+
+        searchProfile();
+
+    }
+
+});
+
+async function searchProfile(){
 
     const profileId =
-        profileInput.value.trim().toUpperCase();
+        profileInput.value.trim();
 
     if(profileId===""){
 
-        alert("Vul eerst een Profile-ID in.");
+        alert("Vul een Profile-ID in.");
 
         profileInput.focus();
 
@@ -27,23 +74,72 @@ continueButton.addEventListener("click",()=>{
 
     }
 
-    // Firebase komt later
+    continueButton.disabled = true;
 
-    window.location.href =
-        "verify.html";
+    continueButton.textContent =
+        "Zoeken...";
 
-});
+    try{
 
-// ---------------------------
-// Enter
-// ---------------------------
+        const q = query(
 
-profileInput.addEventListener("keydown",e=>{
+            collection(db,"users"),
 
-    if(e.key==="Enter"){
+            where("profileId","==",profileId)
 
-        continueButton.click();
+        );
+
+        const result =
+            await getDocs(q);
+
+        if(result.empty){
+
+            alert("Profiel niet gevonden.");
+
+            continueButton.disabled = false;
+
+            continueButton.textContent =
+                "Profiel koppelen";
+
+            return;
+
+        }
+
+        const user =
+            result.docs[0];
+
+        sessionStorage.setItem(
+
+            "userId",
+
+            user.id
+
+        );
+
+        sessionStorage.setItem(
+
+            "profileId",
+
+            profileId
+
+        );
+
+        window.location.href =
+            "verify.html";
 
     }
 
-});
+    catch(error){
+
+        console.error(error);
+
+        alert("Er is iets misgelopen.");
+
+        continueButton.disabled = false;
+
+        continueButton.textContent =
+            "Profiel koppelen";
+
+    }
+
+}
