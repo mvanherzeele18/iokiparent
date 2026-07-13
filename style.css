@@ -17,7 +17,9 @@ body{
     min-height:100vh;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
     background:linear-gradient(180deg,#87CEEB 0%,#BFEFFF 100%);
@@ -25,6 +27,10 @@ body{
     overflow-x:hidden;
 
 }
+
+/* ===========================
+   Container
+=========================== */
 
 .container{
 
@@ -37,30 +43,42 @@ body{
 
 }
 
+/* ===========================
+   Logo
+=========================== */
+
 .logo{
 
-    margin-bottom:15px;
+    margin-bottom:10px;
 
 }
 
 .logo img{
 
     width:280px;
+
     max-width:80%;
 
     user-select:none;
+
     pointer-events:none;
 
 }
 
+/* ===========================
+   Titel
+=========================== */
+
 h1{
 
-    font-size:3.5rem;
+    font-size:3.8rem;
 
     color:white;
 
     text-shadow:
+
         3px 3px 0 #4BA3FF,
+
         6px 6px 10px rgba(0,0,0,.2);
 
     margin-bottom:15px;
@@ -69,13 +87,17 @@ h1{
 
 .subtitle{
 
-    font-size:1.4rem;
+    font-size:1.5rem;
 
     color:white;
 
     margin-bottom:40px;
 
 }
+
+/* ===========================
+   Kaart
+=========================== */
 
 .card{
 
@@ -86,6 +108,7 @@ h1{
     padding:40px;
 
     box-shadow:
+
         0 15px 30px rgba(0,0,0,.15);
 
 }
@@ -104,9 +127,13 @@ h1{
 
     margin-bottom:25px;
 
-    line-height:1.5;
+    line-height:1.6;
 
 }
+
+/* ===========================
+   Input
+=========================== */
 
 input{
 
@@ -114,19 +141,19 @@ input{
 
     padding:18px;
 
-    font-size:1.3rem;
-
-    text-align:center;
-
     border:3px solid #ddd;
 
     border-radius:18px;
 
+    font-size:1.3rem;
+
+    text-align:center;
+
+    text-transform:uppercase;
+
     outline:none;
 
     transition:.2s;
-
-    text-transform:uppercase;
 
 }
 
@@ -135,6 +162,10 @@ input:focus{
     border-color:#4BA3FF;
 
 }
+
+/* ===========================
+   Knop
+=========================== */
 
 button{
 
@@ -164,7 +195,7 @@ button{
 
 button:hover{
 
-    transform:scale(1.03);
+    transform:translateY(-3px);
 
 }
 
@@ -173,6 +204,10 @@ button:active{
     transform:scale(.98);
 
 }
+
+/* ===========================
+   Info
+=========================== */
 
 .info{
 
@@ -187,6 +222,7 @@ button:active{
     text-align:left;
 
     box-shadow:
+
         0 10px 25px rgba(0,0,0,.15);
 
 }
@@ -201,7 +237,7 @@ button:active{
 
 .info ul{
 
-    padding-left:20px;
+    padding-left:22px;
 
     line-height:2;
 
@@ -209,11 +245,15 @@ button:active{
 
 }
 
+/* ===========================
+   Mobiel
+=========================== */
+
 @media(max-width:700px){
 
     h1{
 
-        font-size:2.6rem;
+        font-size:2.8rem;
 
     }
 
