@@ -1,11 +1,8 @@
-/* ===========================
-   Ioki Parent
-=========================== */
-
 *{
 
     margin:0;
     padding:0;
+
     box-sizing:border-box;
 
 }
@@ -14,7 +11,7 @@ body{
 
     font-family:Arial, Helvetica, sans-serif;
 
-    min-height:100vh;
+    background:#BFEFFF;
 
     display:flex;
 
@@ -22,100 +19,63 @@ body{
 
     align-items:center;
 
-    background:linear-gradient(180deg,#87CEEB 0%,#BFEFFF 100%);
-
-    overflow-x:hidden;
+    min-height:100vh;
 
 }
-
-/* ===========================
-   Container
-=========================== */
 
 .container{
 
     width:90%;
-    max-width:700px;
+
+    max-width:650px;
 
     text-align:center;
 
-    padding:40px 20px;
+}
+
+.logo{
+
+    width:220px;
+
+    margin-bottom:20px;
 
 }
 
-/* ===========================
-   Logo
-=========================== */
+h1{
 
-.logo{
+    color:white;
+
+    font-size:3.5rem;
 
     margin-bottom:10px;
 
 }
 
-.logo img{
-
-    width:280px;
-
-    max-width:80%;
-
-    user-select:none;
-
-    pointer-events:none;
-
-}
-
-/* ===========================
-   Titel
-=========================== */
-
-h1{
-
-    font-size:3.8rem;
-
-    color:white;
-
-    text-shadow:
-
-        3px 3px 0 #4BA3FF,
-
-        6px 6px 10px rgba(0,0,0,.2);
-
-    margin-bottom:15px;
-
-}
-
 .subtitle{
 
-    font-size:1.5rem;
-
     color:white;
 
-    margin-bottom:40px;
+    font-size:1.3rem;
+
+    margin-bottom:35px;
 
 }
-
-/* ===========================
-   Kaart
-=========================== */
 
 .card{
 
     background:white;
 
-    border-radius:30px;
+    border-radius:25px;
 
-    padding:40px;
+    padding:35px;
 
     box-shadow:
 
-        0 15px 30px rgba(0,0,0,.15);
+        0 10px 30px rgba(0,0,0,.15);
 
 }
 
 .card h2{
-
-    color:#333;
 
     margin-bottom:15px;
 
@@ -127,203 +87,99 @@ h1{
 
     margin-bottom:25px;
 
-    line-height:1.6;
-
 }
-
-/* ===========================
-   Input
-=========================== */
-
-input{
-
-    width:100%;
-
-    padding:18px;
-
-    border:3px solid #ddd;
-
-    border-radius:18px;
-
-    font-size:1.3rem;
-
-    text-align:center;
-
-    text-transform:uppercase;
-
-    outline:none;
-
-    transition:.2s;
-
-}
-
-input:focus{
-
-    border-color:#4BA3FF;
-
-}
-
-/* ===========================
-   Knop
-=========================== */
 
 button{
 
     width:100%;
 
-    margin-top:25px;
+    border:none;
+
+    border-radius:15px;
 
     padding:18px;
 
-    border:none;
+    font-size:1.15rem;
 
-    border-radius:18px;
+    cursor:pointer;
 
     background:#4BA3FF;
 
     color:white;
 
-    font-size:1.3rem;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:.2s;
+    margin-top:18px;
 
 }
 
 button:hover{
 
-    transform:translateY(-3px);
+    transform:translateY(-2px);
 
 }
 
-button:active{
+.secondary{
 
-    transform:scale(.98);
-
-}
-
-/* ===========================
-   Info
-=========================== */
-
-.info{
-
-    margin-top:35px;
-
-    background:white;
-
-    border-radius:25px;
-
-    padding:25px;
-
-    text-align:left;
-
-    box-shadow:
-
-        0 10px 25px rgba(0,0,0,.15);
+    background:#999;
 
 }
 
-.info h3{
+.hidden{
 
-    margin-bottom:15px;
-
-    color:#333;
+    display:none;
 
 }
 
-.info ul{
+/* ---------------- */
 
-    padding-left:22px;
+#children-list{
 
-    line-height:2;
-
-    color:#555;
+    margin-top:20px;
 
 }
 
-/* ===========================
-   Verify
-=========================== */
+/* ---------------- */
 
-.mail-icon{
+.child{
 
-    font-size:5rem;
+    display:flex;
 
-    margin-bottom:20px;
+    justify-content:space-between;
 
-}
+    align-items:center;
 
-.spinner{
+    background:#F5F8FF;
 
-    width:60px;
+    border-radius:18px;
 
-    height:60px;
+    padding:18px;
 
-    margin:30px auto 0;
-
-    border:6px solid #d9ecff;
-
-    border-top:6px solid #4BA3FF;
-
-    border-radius:50%;
-
-    animation:spin 1s linear infinite;
+    margin-top:15px;
 
 }
 
-@keyframes spin{
+.child-name{
 
-    from{
+    font-size:1.2rem;
 
-        transform:rotate(0deg);
-
-    }
-
-    to{
-
-        transform:rotate(360deg);
-
-    }
+    font-weight:bold;
 
 }
 
-/* ===========================
-   Mobiel
-=========================== */
+.child button{
+
+    width:auto;
+
+    margin:0;
+
+    padding:12px 18px;
+
+}
 
 @media(max-width:700px){
 
     h1{
 
-        font-size:2.8rem;
-
-    }
-
-    .subtitle{
-
-        font-size:1.2rem;
-
-    }
-
-    .card{
-
-        padding:25px;
-
-    }
-
-    input{
-
-        font-size:1.1rem;
-
-    }
-
-    button{
-
-        font-size:1.1rem;
+        font-size:2.6rem;
 
     }
 
