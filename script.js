@@ -10,9 +10,13 @@ import {
     collection,
     query,
     where,
-    getDocs
+    getDocs,
+    updateDoc,
+    doc
 
 } from "./firebase.js";
+
+emailjs.init("ShVsN09_8RGYLnUg2");
 
 const profileInput =
     document.getElementById("profile-id");
@@ -108,6 +112,16 @@ async function searchProfile(){
         const user =
             result.docs[0];
 
+        const data = user.data();
+
+        const verificationToken =
+            crypto.randomUUID();
+        
+        sessionStorage.setItem(
+            "verificationToken",
+            verificationToken
+        );
+        
         sessionStorage.setItem(
 
             "userId",
