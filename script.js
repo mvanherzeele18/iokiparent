@@ -233,21 +233,9 @@ async function loadChildren(user){
 
 addChildButton.addEventListener("click",()=>{
 
-    const profileId = prompt(
+    window.location.href =
 
-        "Voer het Profile-ID van je kind in."
-
-    );
-
-    if(!profileId) return;
-
-    connectChild(
-
-        profileId
-            .trim()
-            .toUpperCase()
-
-    );
+        "addchild.html";
 
 });
 
