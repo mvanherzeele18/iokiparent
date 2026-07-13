@@ -15,6 +15,10 @@ import {
 const status =
     document.getElementById("status");
 
+// -------------------------------------
+// Gegevens ophalen
+// -------------------------------------
+
 const userId =
     sessionStorage.getItem("userId");
 
@@ -25,42 +29,53 @@ if(!userId){
 
 }
 
+// -------------------------------------
+// Controle starten
+// -------------------------------------
+
 checkVerification();
 
 setInterval(
 
     checkVerification,
 
-    3000
+    2000
 
 );
+
+// -------------------------------------
+// Firestore controleren
+// -------------------------------------
 
 async function checkVerification(){
 
     try{
 
-        const snap =
+        const snapshot =
+
             await getDoc(
 
                 doc(db,"users",userId)
 
             );
 
-        if(!snap.exists()){
+        if(!snapshot.exists()){
 
             status.textContent =
-                "Profiel bestaat niet meer.";
+
+                "Profiel bestaat niet.";
 
             return;
 
         }
 
         const data =
-            snap.data();
+            snapshot.data();
 
         if(data.parentVerified){
 
             window.location.href =
+
                 "dashboard.html";
 
             return;
@@ -79,7 +94,7 @@ async function checkVerification(){
 
         status.textContent =
 
-            "Verbinding met Firebase mislukt.";
+            "Kan geen verbinding maken met Firebase.";
 
     }
 
