@@ -12,6 +12,9 @@ import {
     where,
     getDocs,
 
+    doc,
+    updateDoc,
+
     onAuthStateChanged
 
 } from "./firebase.js";
@@ -58,9 +61,9 @@ onAuthStateChanged(auth, user => {
 // Terug
 // -------------------------------------
 
-backButton.addEventListener("click",()=>{
+backButton.addEventListener("click", () => {
 
-    window.location.href="index.html";
+    window.location.href = "index.html";
 
 });
 
@@ -68,20 +71,18 @@ backButton.addEventListener("click",()=>{
 // Profile-ID opmaken
 // -------------------------------------
 
-profileInput.addEventListener("input",()=>{
+profileInput.addEventListener("input", () => {
 
     let value = profileInput.value
         .toUpperCase()
-        .replace(/[^A-Z0-9]/g,"");
+        .replace(/[^A-Z0-9]/g, "");
 
     if(value.length > 4){
 
         value =
             value.substring(0,4)
-            +
-            "-"
-            +
-            value.substring(4,8);
+            + "-"
+            + value.substring(4,8);
 
     }
 
@@ -93,9 +94,9 @@ profileInput.addEventListener("input",()=>{
 // Enter
 // -------------------------------------
 
-profileInput.addEventListener("keydown",e=>{
+profileInput.addEventListener("keydown", e => {
 
-    if(e.key==="Enter"){
+    if(e.key === "Enter"){
 
         connectChild();
 
@@ -107,7 +108,7 @@ profileInput.addEventListener("keydown",e=>{
 // Knop
 // -------------------------------------
 
-connectButton.addEventListener("click",()=>{
+connectButton.addEventListener("click", () => {
 
     connectChild();
 
@@ -130,7 +131,7 @@ async function connectChild(){
     const profileId =
         profileInput.value.trim();
 
-    if(profileId===""){
+    if(profileId === ""){
 
         alert("Vul een Profile-ID in.");
 
@@ -159,9 +160,7 @@ async function connectChild(){
         if(snapshot.empty){
 
             throw new Error(
-
                 "Profile-ID niet gevonden."
-
             );
 
         }
@@ -172,13 +171,14 @@ async function connectChild(){
         const data =
             userDoc.data();
 
-        // -----------------------------
+        // ---------------------------------
         // Heeft al een ouder?
-        // -----------------------------
+        // ---------------------------------
 
         if(
 
             data.parentUid &&
+
             data.parentUid !== currentUser.uid
 
         ){
@@ -191,9 +191,27 @@ async function connectChild(){
 
         }
 
-        // -----------------------------
+        // ---------------------------------
+        // Aanvraag opslaan
+        // ---------------------------------
+
+        await updateDoc(
+
+            doc(db, "users", userDoc.id),
+
+            {
+
+                pendingParentUid: currentUser.uid,
+
+                pendingParentEmail: currentUser.email
+
+            }
+
+        );
+
+        // ---------------------------------
         // Gegevens bewaren
-        // -----------------------------
+        // ---------------------------------
 
         sessionStorage.setItem(
 
@@ -211,9 +229,9 @@ async function connectChild(){
 
         );
 
-        // -----------------------------
-        // Mail versturen
-        // -----------------------------
+        // ---------------------------------
+        // Verificatielink
+        // ---------------------------------
 
         const verificationLink =
 
@@ -223,6 +241,10 @@ async function connectChild(){
 
             userDoc.id;
 
+        // ---------------------------------
+        // Mail versturen
+        // ---------------------------------
+
         await emailjs.send(
 
             "service_3f06gei",
@@ -231,24 +253,22 @@ async function connectChild(){
 
             {
 
-                to_email:
-                    data.email,
+                to_email: data.email,
 
-                verification_link:
-                    verificationLink,
+                profile_id: profileId,
 
-                profile_id:
-                    profileId
+                verification_link: verificationLink
 
             }
 
         );
 
-        // -----------------------------
-        // Verify
-        // -----------------------------
+        // ---------------------------------
+        // Naar verify
+        // ---------------------------------
 
         window.location.href =
+
             "verify.html";
 
     }
@@ -262,6 +282,7 @@ async function connectChild(){
         connectButton.disabled = false;
 
         connectButton.textContent =
+
             "Kind koppelen";
 
     }
