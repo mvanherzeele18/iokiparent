@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang="nl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Kind koppelen - Ioki Parent</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <img
+            src="assets/images/logo.png"
+            class="logo"
+            alt="Ioki Parent"
+        >
+
+        <h1>Kind koppelen</h1>
+
+        <p class="subtitle">
+
+            Voer het Profile-ID van je kind in.
+
+        </p>
+
+        <div class="card">
+
+            <input
+
+                id="profile-id"
+
+                type="text"
+
+                maxlength="9"
+
+                placeholder="AB12-CD34"
+
+                autocomplete="off"
+
+            >
+
+            <button id="connect-button">
+
+                Kind koppelen
+
+            </button>
+
+            <button
+
+                id="back-button"
+
+                class="secondary"
+
+            >
+
+                Terug
+
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h3>
+
+                Hoe werkt dit?
+
+            </h3>
+
+            <p>
+
+                Wanneer je een geldig Profile-ID invoert,
+                sturen we een bevestigingsmail naar het
+                e-mailadres van het kind.
+
+            </p>
+
+            <p>
+
+                Na bevestiging wordt het kind automatisch
+                gekoppeld aan jouw ouderaccount.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script
+        type="module"
+        src="addchild.js"
+    ></script>
+
+</body>
+
+</html>
