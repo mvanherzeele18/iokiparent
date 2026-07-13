@@ -1,40 +1,42 @@
 // =====================================
-// Firebase
+// Ioki Parent - Firebase
 // =====================================
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
 import {
-    getAuth,
-    GoogleAuthProvider,
-    signInWithPopup,
-    signOut,
-    onAuthStateChanged
-}
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
-import {
     getFirestore,
+    collection,
+    query,
+    where,
+    getDocs,
     doc,
     getDoc,
-    setDoc,
-    updateDoc,
-    serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+    updateDoc
+
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 // -------------------------------------
 // Config
 // -------------------------------------
 
 const firebaseConfig = {
+
     apiKey: "AIzaSyCJFP0Bo2f3CUCs_YmrT5wWUFzLbnBIXVk",
+
     authDomain: "iokigames.firebaseapp.com",
+
     projectId: "iokigames",
+
     storageBucket: "iokigames.firebasestorage.app",
+
     messagingSenderId: "801522202722",
+
     appId: "1:801522202722:web:cd78c84f55858313af393b",
+
     measurementId: "G-NPJZSDCGBN"
+
 };
 
 // -------------------------------------
@@ -43,27 +45,23 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);
-
-export const db = getFirestore(app);
-
-export const provider = new GoogleAuthProvider();
+const db = getFirestore(app);
 
 // -------------------------------------
-// Exports
+// Exporteren
 // -------------------------------------
 
 export {
 
-    signInWithPopup,
-    signOut,
-    onAuthStateChanged,
+    db,
+
+    collection,
+    query,
+    where,
+    getDocs,
 
     doc,
     getDoc,
-    setDoc,
-    updateDoc,
-
-    serverTimestamp
+    updateDoc
 
 };
