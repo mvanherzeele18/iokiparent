@@ -10,7 +10,9 @@ import {
     collection,
     query,
     where,
-    getDocs
+    getDocs,
+
+    onAuthStateChanged
 
 } from "./firebase.js";
 
@@ -34,15 +36,23 @@ const backButton =
 emailjs.init("ShVsN09_8RGYLnUg2");
 
 // -------------------------------------
-// Niet ingelogd?
+// Ingelogde gebruiker
 // -------------------------------------
 
-if(!auth.currentUser){
+let currentUser = null;
 
-    window.location.href =
-        "index.html";
+onAuthStateChanged(auth, user => {
 
-}
+    if(!user){
+
+        window.location.href = "index.html";
+        return;
+
+    }
+
+    currentUser = user;
+
+});
 
 // -------------------------------------
 // Terug
@@ -50,8 +60,7 @@ if(!auth.currentUser){
 
 backButton.addEventListener("click",()=>{
 
-    window.location.href =
-        "index.html";
+    window.location.href="index.html";
 
 });
 
@@ -110,6 +119,14 @@ connectButton.addEventListener("click",()=>{
 
 async function connectChild(){
 
+    if(!currentUser){
+
+        alert("Even wachten...");
+
+        return;
+
+    }
+
     const profileId =
         profileInput.value.trim();
 
@@ -156,16 +173,13 @@ async function connectChild(){
             userDoc.data();
 
         // -----------------------------
-        // Heeft al ouder?
+        // Heeft al een ouder?
         // -----------------------------
 
         if(
 
-            data.parentUid
-
-            &&
-
-            data.parentUid !== auth.currentUser.uid
+            data.parentUid &&
+            data.parentUid !== currentUser.uid
 
         ){
 
@@ -198,7 +212,7 @@ async function connectChild(){
         );
 
         // -----------------------------
-        // Mail sturen
+        // Mail versturen
         // -----------------------------
 
         const verificationLink =
@@ -220,18 +234,18 @@ async function connectChild(){
                 to_email:
                     data.email,
 
-                profile_id:
-                    profileId,
-
                 verification_link:
-                    verificationLink
+                    verificationLink,
+
+                profile_id:
+                    profileId
 
             }
 
         );
 
         // -----------------------------
-        // Naar verify
+        // Verify
         // -----------------------------
 
         window.location.href =
