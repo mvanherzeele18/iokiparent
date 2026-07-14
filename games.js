@@ -214,8 +214,6 @@ saveButton.addEventListener("click",async()=>{
 
     );
 
-    alert("Opgeslagen!");
-
     window.location.href="dashboard.html";
 
 });
