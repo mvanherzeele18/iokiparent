@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="nl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Speeltijd - Ioki Parent</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+        <img
+            src="assets/images/logo.png"
+            class="logo"
+            alt="Ioki Parent"
+        >
+
+    <h1>Speeltijd</h1>
+
+    <p class="subtitle">
+
+        Stel de maximale dagelijkse speeltijd in.
+
+    </p>
+
+    <div class="card">
+
+        <h2 id="child-name">
+
+            Laden...
+
+        </h2>
+
+        <br>
+
+        <select id="time-select">
+
+            <option value="15">15 minuten</option>
+
+            <option value="30">30 minuten</option>
+
+            <option value="45">45 minuten</option>
+
+            <option value="60">60 minuten</option>
+
+            <option value="90">90 minuten</option>
+
+            <option value="120">120 minuten</option>
+
+            <option value="-1">Onbeperkt</option>
+
+        </select>
+
+        <button id="save-button">
+
+            Opslaan
+
+        </button>
+
+    </div>
+
+    <button
+        id="back-button"
+        class="secondary"
+    >
+
+        ← Terug
+
+    </button>
+
+</div>
+
+<script type="module" src="time.js"></script>
+
+</body>
+
+</html>
