@@ -155,6 +155,30 @@ input:focus{
 
 }
 
+select{
+
+    width:100%;
+
+    padding:18px;
+
+    font-size:1.1rem;
+
+    border:2px solid #ddd;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+    outline:none;
+
+}
+
+select:focus{
+
+    border-color:#4BA3FF;
+
+}
+
 /* =====================================
    Buttons
 ===================================== */
