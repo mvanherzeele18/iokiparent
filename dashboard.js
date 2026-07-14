@@ -194,7 +194,7 @@ contactButton.addEventListener("click",()=>{
 
     window.open(
 
-        "https://forms.gle/JOUW_GOOGLE_FORM",
+        "https://docs.google.com/forms/d/e/1FAIpQLSdGwtQ4zVSJop5u3Max_OO9nN5Jo0xFYAaskSFdGKM-78VB_A/viewform?usp=header",
 
         "_blank"
 
