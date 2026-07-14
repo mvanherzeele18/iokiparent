@@ -65,7 +65,6 @@ async function loadData(){
 
     if(!snapshot.exists()){
 
-        alert("Kind niet gevonden.");
         return;
 
     }
@@ -74,8 +73,6 @@ async function loadData(){
         snapshot.data();
 
     if(data.parentUid!==currentUser.uid){
-
-        alert("Geen toegang.");
 
         window.location.href="index.html";
 
@@ -106,8 +103,6 @@ saveButton.addEventListener("click",async()=>{
         }
 
     );
-
-    alert("Speeltijd opgeslagen!");
 
     window.location.href="dashboard.html";
 
