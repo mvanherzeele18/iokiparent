@@ -117,7 +117,12 @@ const AVAILABLE_GAMES = [
     {
         id:"cut",
         name:"Snijden"
-    }
+    },
+
+    {
+        id:"puzzle",
+        name:"Puzzel"
+    },
 
 ];
 
