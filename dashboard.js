@@ -134,13 +134,17 @@ async function loadChild(){
 
             data.profileId;
 
-        dailyLimit.textContent =
-
-            (data.dailyLimit || 60)
-
-            +
-
-            " minuten";
+        if(data.dailyLimit === -1){
+        
+            dailyLimit.textContent = "Onbeperkt";
+        
+        }
+        else{
+        
+            dailyLimit.textContent =
+                (data.dailyLimit ?? 60) + " minuten";
+        
+        }
 
     }
 
