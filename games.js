@@ -55,6 +55,16 @@ const AVAILABLE_GAMES = [
     },
 
     {
+        id:"numbers",
+        name:"Nummers"
+    },
+
+    {
+        id:"shapes",
+        name:"Vormen"
+    },
+
+    {
         id:"moles",
         name:"Mollen"
     },
