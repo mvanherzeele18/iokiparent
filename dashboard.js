@@ -33,9 +33,6 @@ const timeButton =
 const gamesButton =
     document.getElementById("games-button");
 
-const infoButton =
-    document.getElementById("info-button");
-
 const contactButton =
     document.getElementById("contact-button");
 
@@ -179,14 +176,6 @@ gamesButton.addEventListener("click",()=>{
     window.location.href =
 
         "games.html";
-
-});
-
-infoButton.addEventListener("click",()=>{
-
-    window.location.href =
-
-        "info.html";
 
 });
 
