@@ -122,8 +122,6 @@ async function connectChild(){
 
     if(!currentUser){
 
-        alert("Even wachten...");
-
         return;
 
     }
@@ -132,8 +130,6 @@ async function connectChild(){
         profileInput.value.trim();
 
     if(profileId === ""){
-
-        alert("Vul een Profile-ID in.");
 
         return;
 
@@ -276,8 +272,6 @@ async function connectChild(){
     catch(error){
 
         console.error(error);
-
-        alert(error.message);
 
         connectButton.disabled = false;
 
