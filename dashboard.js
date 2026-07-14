@@ -136,10 +136,11 @@ async function loadChild(){
             dailyLimit.textContent = "Onbeperkt";
         
         }
+            
         else{
         
             dailyLimit.textContent =
-                (data.dailyLimit ?? 60) + " minuten";
+                (data.dailyLimit) + " minuten";
         
         }
 
