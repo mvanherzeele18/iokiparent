@@ -208,7 +208,7 @@ select:focus{
 ===================================== */
 
 button{
-
+    -webkit-tap-highlight-color: transparent;
     width:100%;
 
     padding:18px;
@@ -304,7 +304,7 @@ button:disabled{
 }
 
 .child button{
-
+    -webkit-tap-highlight-color: transparent;
     width:auto;
 
     margin:0;
