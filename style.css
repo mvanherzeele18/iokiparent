@@ -207,7 +207,7 @@ select:focus{
    Buttons
 ===================================== */
 
-.button{
+button{
     -webkit-tap-highlight-color: transparent;
     width:100%;
 
@@ -231,25 +231,25 @@ select:focus{
 
 }
 
-.button:first-of-type{
+button:first-of-type{
 
     margin-top:0;
 
 }
 
-.button:hover{
+button:hover{
 
     transform:translateY(-2px);
 
 }
 
-.button:active{
+button:active{
 
     transform:scale(.98);
 
 }
 
-.button:disabled{
+button:disabled{
 
     opacity:.6;
 
