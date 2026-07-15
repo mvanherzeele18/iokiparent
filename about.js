@@ -46,7 +46,7 @@ supportButton.addEventListener("click",()=>{
 
     window.open(
 
-        "JOUW_GOOGLE_FORM_LINK",
+        "https://docs.google.com/forms/d/e/1FAIpQLSdGwtQ4zVSJop5u3Max_OO9nN5Jo0xFYAaskSFdGKM-78VB_A/viewform?usp=header",
 
         "_blank"
 
