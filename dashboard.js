@@ -39,6 +39,9 @@ const contactButton =
 const backButton =
     document.getElementById("back-button");
 
+const aboutButton =
+document.getElementById("about-button");
+
 // -------------------------------------
 // Ingelogde gebruiker
 // -------------------------------------
@@ -197,5 +200,11 @@ backButton.addEventListener("click",()=>{
     window.location.href =
 
         "index.html";
+
+});
+
+aboutButton.addEventListener("click",()=>{
+
+    window.location.href="about.html";
 
 });
