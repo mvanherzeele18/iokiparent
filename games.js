@@ -124,6 +124,11 @@ const AVAILABLE_GAMES = [
         name:"Puzzel"
     },
 
+    {
+        id:"logic",
+        name:"Logica"
+    },
+
 ];
 
 // ------------------------------------
