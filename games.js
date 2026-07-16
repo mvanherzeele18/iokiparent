@@ -129,6 +129,11 @@ const AVAILABLE_GAMES = [
         name:"Logica"
     },
 
+    {
+        id:"bowling",
+        name:"Bowling"
+    },
+
 ];
 
 // ------------------------------------
