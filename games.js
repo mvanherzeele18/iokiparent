@@ -134,6 +134,11 @@ const AVAILABLE_GAMES = [
         name:"Bowling"
     },
 
+    {
+        id:"bird",
+        name:"Vogel"
+    },
+
 ];
 
 // ------------------------------------
