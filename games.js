@@ -139,6 +139,11 @@ const AVAILABLE_GAMES = [
         name:"Vogel"
     },
 
+    {
+        id:"dino",
+        name:"Dino"
+    },
+    
 ];
 
 // ------------------------------------
